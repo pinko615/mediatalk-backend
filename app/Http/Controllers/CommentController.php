@@ -22,9 +22,11 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $body = $request->all();
+        $comment = Comment::create($body);
+        return response($comment, 201);
     }
 
     /**
