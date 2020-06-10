@@ -14,7 +14,10 @@ class CreateLikeablesTable extends Migration
     public function up()
     {
         Schema::create('likeables', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->integer('likeable_id');
+            $table->string('likeable_type');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
