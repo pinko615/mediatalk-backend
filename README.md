@@ -8,7 +8,7 @@ Visit the [Frontend](https://github.com/pinko615) side of this project
 ## First steps
 You can download or clone this project to see the code of the entire website.
 ```
-git clone https://github.com/pinko615/GH-Proyecto-1-Netflix-Frontend.git
+git clone https://github.com/pinko615/mediatalk-backend.git
 ```
 
 ## Developed with
