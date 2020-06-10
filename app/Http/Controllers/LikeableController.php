@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
+use App\Post;
 use App\Likeable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LikeableController extends Controller
 {
@@ -82,4 +85,42 @@ class LikeableController extends Controller
     {
         //
     }
+
+    public function addPostLike($id, Request $request)
+    {
+        {
+            $user_id = Auth::id();
+            $body = $request;
+            $post_id =$body['post_id'];
+            $post = Post::find($post_id);
+            $likes = $post->likes()->where('user_id',$user_id)->get();
+            if($likes->isNotEmpty()){
+                return response([
+                    'message' => 'Only one like per post'
+                ],400);
+            }
+            $post->likes()->create(['user_id'=>$user_id]);
+            return response([
+                'message' => 'You give a Like'
+            ],201);
+        }
+    }
+    // public function addCommnetLike($id, Request $request)
+    // {
+    //     {
+    //         $user_id = Auth::id();
+    //         $comment = Comment::find($id);
+    //         $likes = $comment->likes()->where('user_id',$user_id)->get();
+    //         if($likes->isNotEmpty()){
+    //             return response([
+    //                 'message' => 'Cant give more than one like per post'
+    //             ],400);
+    //         }
+    //         $comment->likes()->create(['user_id'=>$user_id]);
+    //         return response([
+    //             'message' => 'thanks u ',
+    //             'likes' => $likes
+    //         ],201);
+    //     }
+    // }
 }
